@@ -1,6 +1,10 @@
+body{
+  margin:0;
+}
+
 html {
-  background-color: #E4E9FD;
-  background-image: -webkit-linear-gradient(65deg, #A683E3 50%, #E4E9FD 50%);
+  background-color: #9ba4b4;
+  background-image: -webkit-linear-gradient(65deg, #14274e 50%, #9ba4b4 50%);
   min-height: 1000px;
   font-family: 'helvetica neue';
 }
@@ -13,13 +17,13 @@ h1 {
 .box {
   max-width: 400px;
   margin: 50px auto;
-  background: white;
+  background: #f1f6f9;
   border-radius: 5px;
   box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
 }
 
 #heading {
-  background-color: #A683E3;
+  background-color: #14274e;
   text-align: center;
 }
 
@@ -27,7 +31,7 @@ h1 {
   min-height: 70px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #F1F1F1;
+  border-bottom: 1px solid #f1f6f9;
 }
 
 .item:last-child {
@@ -36,7 +40,7 @@ h1 {
 
 input:checked+p {
   text-decoration: line-through;
-  text-decoration-color: #A683E3;
+  text-decoration-color: #14274e;
 }
 
 input[type="checkbox"] {
@@ -61,10 +65,10 @@ button {
   width: 50px;
   border-radius: 50%;
   border-color: transparent;
-  background-color: #A683E3;
+  background-color: #14274e;
   color: #fff;
   font-size: 30px;
-  padding-bottom: 6px;
+  padding: 6px;
   border-width: 0;
 }
 
@@ -81,7 +85,7 @@ input[type="text"] {
 
 input[type="text"]:focus {
   outline: none;
-  box-shadow: inset 0 -3px 0 0 #A683E3;
+  box-shadow: inset 0 -3px 0 0 #1687a7;
 }
 
 ::placeholder {
@@ -94,3 +98,58 @@ footer {
   color: rgba(0, 0, 0, 0.5);
   text-align: center;
 }
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+/* Sidebar links */
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+
+/* Active/current link */
+.sidebar a.active {
+  background-color: #394867;
+  color: white;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
