@@ -1,0 +1,20 @@
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <%lists.forEach(function(list){%>
+      <a href="/<%= list.name%>"><%= list.name %></a>
+
+  <% }) %>
+</div>
+
+<!-- Use any element to open the sidenav -->
+ <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Lists</span>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>

@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 const _ = require("lodash");
 const app = express();
 
-
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({
@@ -45,6 +44,11 @@ const listSchema = {
 const List = mongoose.model("List", listSchema);
 
 app.get("/", function(req, res) {
+  let allLists = [];
+
+  List.find({}, function(err,lists){
+      allLists = lists;
+  });
 
   Item.find({}, function(err, foundItems) {
 
@@ -60,15 +64,24 @@ app.get("/", function(req, res) {
     } else {
       res.render("list", {
         listTitle: "Today",
-        newListItems: foundItems
+        newListItems: foundItems,
+        lists: allLists
+
       });
     }
 
   });
 });
 
+
 app.get("/:customListName", function(req,res){
   const customListName = _.capitalize(req.params.customListName);
+
+  let allLists = [];
+
+  List.find({}, function(err,lists){
+      allLists = lists;
+  });
 
   List.findOne({name: customListName}, function(err, foundList){
     if(!err){
@@ -76,22 +89,21 @@ app.get("/:customListName", function(req,res){
         //Create a new List
         const list = new List({
           name: customListName,
-          items: defaultItems
+          items: defaultItems,
         });
 
-        list.save();
-        res.redirect("/" + customListName);
+        list.save(() => res.redirect("/" + customListName));
+        //res.redirect("/" + customListName);
       }else{
         //Show a new list
         res.render("list", {
           listTitle: foundList.name,
-          newListItems: foundList.items
+          newListItems: foundList.items,
+          lists: allLists
         });
       }
     }
   })
-
-
 
 });
 
@@ -135,26 +147,8 @@ app.post("/delete", function(req, res) {
       }
     })
   }
-
-
 });
 
-app.get("/work", function(req, res) {
-  res.render("list", {
-    listTitle: "Work List",
-    newListItems: workItems
-  });
-});
-
-app.get("/about", function(req, res) {
-  res.render("about");
-});
-
-app.post("/work", function(req, res) {
-  let item = req.body.newItem;
-  workItems.push(item);
-  res.redirect("/work");
-})
 
 app.listen(3000, function() {
   console.log("Server is running on port 3000")
