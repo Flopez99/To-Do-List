@@ -1,0 +1,30 @@
+<div id="mySidenav" class="sidenav">
+  <%lists.forEach(function(list){%>
+      <a href="/<%= list.name%>"><%= list.name %></a>
+  <% }) %>
+  <!-- <button onclick="myFunction()">Add List</button> -->
+
+  <!-- <p id="demo"></p> -->
+
+
+</div>
+
+<!-- Use any element to open the sidenav -->
+
+<script>
+  function myFunction() {
+    var list = prompt("Please enter a name for your list: ");
+    if (list != null) {
+      document.getElementById("demo").innerHTML =
+      "Hello " + person + "! How are you today?";
+    }
+  }
+
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
