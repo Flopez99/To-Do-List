@@ -59,14 +59,13 @@ app.get("/", function(req, res) {
         } else {
           console.log("Success inserting items");
         }
+        res.redirect("/");
       });
-      res.redirect("/");
     } else {
       res.render("list", {
         listTitle: "Today",
         newListItems: foundItems,
-        lists: allLists
-
+        lists: allLists,
       });
     }
 
@@ -90,10 +89,14 @@ app.get("/:customListName", function(req,res){
         const list = new List({
           name: customListName,
           items: defaultItems,
+          lists: allLists
+
         });
 
-        list.save(() => res.redirect("/" + customListName));
-        //res.redirect("/" + customListName);
+        list.save(function(err, result){
+          res.redirect("/" + customListName);
+        });
+
       }else{
         //Show a new list
         res.render("list", {
@@ -105,6 +108,42 @@ app.get("/:customListName", function(req,res){
     }
   })
 
+});
+
+app.post("/redirect_page", function(req,res){
+  const newListName =  _.capitalize(req.body.newList);
+
+  let allLists = [];
+
+  List.find({}, function(err,lists){
+      allLists = lists;
+  });
+
+  List.findOne({name: newListName}, function(err, foundList){
+    if(!err){
+      if(!foundList){
+        //Create a new List
+        const list = new List({
+          name: newListName,
+          items: defaultItems,
+          lists: allLists
+
+        });
+
+        list.save(function(err, result){
+          res.redirect("/" + newListName);
+        });
+
+      }else{
+        //Show a new list
+        res.render("list", {
+          listTitle: foundList.name,
+          newListItems: foundList.items,
+          lists: allLists
+        });
+      }
+    }
+  })
 });
 
 app.post("/", function(req, res) {

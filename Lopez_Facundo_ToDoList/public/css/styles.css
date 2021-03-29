@@ -1,11 +1,15 @@
 body{
   margin:0;
 }
+a{
+margin-bottom: 14px;
+
+}
 
 html {
   background-color: #9ba4b4;
-  background-image: -webkit-linear-gradient(65deg, #14274e 50%, #9ba4b4 50%);
-  min-height: 1000px;
+  background-image: -webkit-linear-gradient(56.5deg, #14274e 50%, #9ba4b4 50%);
+  min-height: 600px;
   font-family: 'helvetica neue';
 }
 
@@ -60,7 +64,29 @@ form.item {
   margin-left: 20px;
 }
 
-button {
+.myButton {
+  margin-left: 35px;
+	background-color:#14274e;
+	border:1px solid black;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:'helvetica neue';
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #394867;
+}
+.myButton:hover {
+	background-color:#394867;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+
+.plus {
   min-height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -71,6 +97,26 @@ button {
   padding: 6px;
   border-width: 0;
 }
+
+input[type="texts"] {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color:white;
+  text-align: center;
+  height: 60px;
+  top: 10px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  font-weight: 200;
+  width: 200px;
+}
+
+input[type="texts"]:focus {
+  outline: none;
+  box-shadow: inset 0 -3px 0 0 #1687a7;
+}
+
 
 input[type="text"] {
   text-align: center;
@@ -101,18 +147,16 @@ footer {
 
 /* The side navigation menu */
 .sidenav {
-  height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
   left: 0;
-  background-color: #111; /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
 }
-
 /* The navigation menu links */
 .sidenav a {
   padding: 8px 8px 8px 32px;
